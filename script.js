@@ -38,27 +38,50 @@ function diskCreator(number, className){
     }
 }
 
+function hanoi(from, via, to, n) {
+    if (n >= 1) {
+        hanoi(from, to, via, n - 1);
+        moves.push([from, to]);
+        hanoi(via, from, to, n - 1);
+    }
+}
 
-function hanoi(from, via, to, n){
-    //TO DO
-    // Use moves.push([from, to]) to apply MOVE(from ------> to)
+function exHanoi_1(start, aux, end, n) {
+    if (n == 1) {
+        moves.push([aux, end]);
+        moves.push([aux, start]);
+        moves.push([end, start]);
+        hanoi(start, aux, finish, 5);
+    }
+        
+    else {
+        exHanoi_1(start, aux, finish, n - 1);
+        hanoi(finish, start, aux, (n - 1) * 5)
+        hanoi(aux, finish, start, (n - 1) * 5 + 2)
+        hanoi(start, aux, end, 5 * n);
+    }
 }
-function exHanoi_1(A, B, C, n){
-    alert("YOU HAVE TO COMPLETE exHanoi_1 Function")
-    //TO DO
-    // Use moves.push([from, to]) to apply MOVE(from ------> to)
 
+function exHanoi_2(A, B, C, D, n) {
+    hanoi(A, B, D, n);
+    hanoi(C, B, A, n);
+    hanoi(D, B, C, n);
 }
-function exHanoi_2(A, B, C, D, n){
-    alert("YOU HAVE TO COMPLETE exHanoi_2 Function")
-    //TO DO
-    // Use moves.push([from, to]) to apply MOVE(from ------> to)
 
+function exhanoi_3(start, aux, end, n) {
+    
+    if(n==1){
+        moves.push([start,end]);
+        moves.push([aux,end]);
+        }
+        else{
+        exhanoi_3(start,aux,end,n-1);
+        moves.push([aux,start]);
+        hanoi(end,aux,start,2*(n-1));
+        hanoi(start,aux,end,2*n);
+        }
 }
-function exhanoi_3(A, B, C, n){
-    alert("YOU HAVE TO COMPLETE exHanoi_3 Function")
-    //TO DO
-}
+
 function moveDisks(from, to){
     const fromEl = rods[from];
     const toEl = rods[to];
